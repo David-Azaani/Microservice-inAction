@@ -14,7 +14,6 @@
     <Folder Include="Contracts\Infrastructure\" />
     <Folder Include="Contracts\Persistence\" />
     <Folder Include="Behaviours\" />
-    <Folder Include="Features\Orders\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
