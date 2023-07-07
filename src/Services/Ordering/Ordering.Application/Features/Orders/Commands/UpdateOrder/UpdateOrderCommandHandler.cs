@@ -29,8 +29,8 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
         public async Task<Result> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
 
-            try
-            {
+            //try
+            //{
                 var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
                 //if (orderToUpdate == null)
                 //{
@@ -44,11 +44,11 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
                 _logger.LogInformation($"Order {orderToUpdate.Id} is successfully updated.");
 
                 return Result.Ok().WithSuccess($"Order {orderToUpdate.Id} is successfully updated.");
-            }
-            catch (Exception e)
-            {
-                return Result.Fail(new Error("Exception").CausedBy(e.Message));
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    return Result.Fail(new Error("Exception").CausedBy(e.Message));
+            //}
         }
     }
 }

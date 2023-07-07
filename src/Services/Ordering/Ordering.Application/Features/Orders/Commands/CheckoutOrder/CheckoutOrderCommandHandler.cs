@@ -34,25 +34,25 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder
         public async Task<Result<int>> Handle(CheckoutOrderCommand request, CancellationToken cancellationToken)
         {
             var orderEntity = _mapper.Map<Order>(request);
-            try
-            {
-                var newOrder = await _orderRepository.AddAsync(orderEntity);
-                _logger.LogInformation($"Order {newOrder.Id} is successfully created.");
+            //try
+            //{
+            var newOrder = await _orderRepository.AddAsync(orderEntity);
+            _logger.LogInformation($"Order {newOrder.Id} is successfully created.");
 
-                var emailResult = await SendMail(newOrder);
+            var emailResult = await SendMail(newOrder);
 
-                // return newOrder.Id;
+            // return newOrder.Id;
 
-                return Result.Merge(Result.Ok(newOrder.Id).
-                        WithSuccess($"Order {newOrder.Id} is successfully created"),
-                        emailResult).ToResult();
+            return Result.Merge(Result.Ok(newOrder.Id).
+                    WithSuccess($"Order {newOrder.Id} is successfully created"),
+                    emailResult).ToResult();
 
 
-            }
-            catch (Exception e)
-            {
-                return Result.Fail(new Error("Exception").CausedBy(e.Message));
-            }
+            // }
+            //catch (Exception e)
+            //{
+            //    return Result.Fail(new Error("Exception").CausedBy(e.Message));
+            //}
 
 
         }

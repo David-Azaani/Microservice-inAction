@@ -1,4 +1,6 @@
-﻿using FluentValidation.Results;
+﻿
+
+using FluentValidation.Results;
 
 namespace Ordering.Application.Exceptions
 {

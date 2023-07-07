@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Contracts\Infrastructure\" />
     <Folder Include="Contracts\Persistence\" />
-    <Folder Include="Behaviours\" />
   </ItemGroup>
 
   <ItemGroup>

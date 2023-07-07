@@ -25,8 +25,8 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
 
         public async Task<Result> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
+            //try
+            //{
                 var orderToDelete = await _orderRepository.GetByIdAsync(request.Id);
                 //if (orderToDelete == null)
                 //{
@@ -38,11 +38,11 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
                 _logger.LogInformation($"Order {orderToDelete.Id} is successfully deleted.");
 
                 return Result.Ok().WithSuccess($"Order {orderToDelete.Id} is successfully deleted.");
-            }
-            catch (Exception e)
-            {
-                return Result.Fail(new Error("Exception").CausedBy(e.Message));
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    return Result.Fail(new Error("Exception").CausedBy(e.Message));
+            //}
         }
     }
 }
