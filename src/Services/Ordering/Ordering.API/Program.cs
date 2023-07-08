@@ -1,5 +1,7 @@
+using Ordering.API.Extentions;
 using Ordering.Application;
 using Ordering.Infrastructure;
+using Ordering.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
@@ -16,7 +18,13 @@ builder.Services.AddInfrastructureServices(configuration);
 
 var app = builder.Build();
 
-
+app.MigrateDatabase<OrderContext>((context, services) =>
+{
+    var logger = services.GetService<ILogger<OrderContextSeed>>();
+    OrderContextSeed
+        .SeedAsync(context, logger)
+        .Wait();
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
