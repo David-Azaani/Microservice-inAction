@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ordering.Application.Models
+﻿namespace Ordering.Application.Models
 {
     public class EmailSettings
     {
-        public string ApiKey { get; set; }
-        public string FromAddress { get; set; }
-        public string FromName { get; set; }
+        public string SMTPServer { get; set; }
+        public int Port { get; set; }
+        public bool Ssl { get; set; }
+        public string EmailUsername { get; set; }
+        public string EmailPassword { get; set; }
+        
+       
     }
 }
