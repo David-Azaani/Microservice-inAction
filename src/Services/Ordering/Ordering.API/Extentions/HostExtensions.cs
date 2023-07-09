@@ -20,7 +20,7 @@ namespace Ordering.API.Extentions
                 {
                     logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
 
-                    await InvokeSeeder(seeder, context, services);
+                   await InvokeSeeder(seeder, context, services);
 
                     logger.LogInformation("Migrated database associated with context {DbContextName}", typeof(TContext).Name);
                 }
@@ -45,7 +45,7 @@ namespace Ordering.API.Extentions
         private static async Task InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext context, IServiceProvider services)
             where TContext : DbContext
         {
-            await context.Database.MigrateAsync();
+             await context.Database.MigrateAsync();
             seeder(context, services);
         }
     }

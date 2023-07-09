@@ -24,10 +24,20 @@ namespace Ordering.Application.Features.Orders.Queries.GetOrderList
         {
             try
             {
+                var result = new List<OrdersVm>();
+
+
                 var orderList = await _orderRepository.GetOrdersByUserName(request.UserName);
-                var result = _mapper.Map<List<OrdersVm>>(orderList);
-                //return result;
+                if (orderList.Any())
+                {
+                    result = _mapper.Map<List<OrdersVm>>(orderList);
+                    //return result;
+
+                }
+
                 return Result.Ok(result).WithSuccess("Success");
+
+
 
             }
             catch (Exception e)
