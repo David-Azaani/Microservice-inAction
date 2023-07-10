@@ -39,16 +39,19 @@ namespace Discount.Grpc.Extentions
         }
         private static void ExecuteMigrations(IConfiguration configuration)
         {
+            
+            // Todo : to check the existence of DiscountDB
+
             using var connection = new NpgsqlConnection
                 (configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             connection.Open();
-
-            using var command = new NpgsqlCommand
+           
+           using var command = new NpgsqlCommand
             {
                 Connection = connection
             };
 
-            command.CommandText = "DROP TABLE IF EXISTS Coupon";
+           command.CommandText = "DROP TABLE IF EXISTS Coupon";
             command.ExecuteNonQuery();
 
             command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, 

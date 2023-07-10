@@ -5,47 +5,52 @@ using Discount.Grpc.Protos;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
-
-ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
-//IWebHostEnvironment environment = builder.Environment;
+// allows both to access and to set up the config
+// IWebHostEnvironment environment = builder.Environment;
 // Add services to the container.
+ConfigurationManager configuration = builder.Configuration; 
+
+#region Redis
 builder.Services.AddStackExchangeRedisCache(option =>
 {
-    option.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString");
+option.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString");
 
-});
+}); 
+#endregion
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+#region General
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
+#endregion
+
+#region GRPC
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 
-    o => o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"])
+o => o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"])
 
-    );
+);
 
 builder.Services.AddScoped<DiscountGrpcService>();
+#endregion
 
-// MassTransit - RabbitMQ Configuration
+#region  MassTransit - RabbitMQ Configuration
 builder.Services.AddMassTransit(config =>
 {
-    config.UsingRabbitMq((ctx, cfg) =>
-    {
-        // configuration["EventBusSettings:HostAddress"]
-        cfg.Host( configuration["EventBusSettings:HostAddress"]);
-    });
+config.UsingRabbitMq((ctx, cfg) =>
+{
+    // configuration["EventBusSettings:HostAddress"]
+cfg.Host(configuration["EventBusSettings:HostAddress"]);
+});
 
 });
-//builder.Services.AddMassTransitHostedService();
+//builder.Services.AddMassTransitHostedService(); 
+#endregion
 
 
 
-
-
-
-
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddSwaggerGen();
 
