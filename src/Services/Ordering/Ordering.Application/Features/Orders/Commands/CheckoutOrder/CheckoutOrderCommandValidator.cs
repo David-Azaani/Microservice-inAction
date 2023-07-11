@@ -12,9 +12,9 @@ namespace Ordering.Application.Features.Orders.Commands.CheckoutOrder
                 .NotNull()
                 .MaximumLength(50).WithMessage("{UserName} must not exceed 50 characters.");
 
-            RuleFor(p => p.EmailAddress)
-               .NotEmpty().WithMessage("{EmailAddress} is required.")
-               .EmailAddress(EmailValidationMode.AspNetCoreCompatible).WithMessage("{EmailAddress} is not Valid !");
+            //RuleFor(p => p.EmailAddress)
+            //   .NotEmpty().WithMessage("{EmailAddress} is required.")
+            //   .EmailAddress(EmailValidationMode.AspNetCoreCompatible).WithMessage("{EmailAddress} is not Valid !");
 
             RuleFor(p => p.TotalPrice)
                 .NotEmpty().WithMessage("{TotalPrice} is required.")
