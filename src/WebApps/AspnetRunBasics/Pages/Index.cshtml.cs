@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspnetRunBasics.Model;
+using AspnetRunBasics.Models;
 using AspnetRunBasics.Sevices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -31,7 +32,7 @@ namespace AspnetRunBasics.Pages
         {
             var product = await _catalogService.GetCatalog(productId);
 
-            var userName = "f00000b";
+            var userName = "swn";
             var basket = await _basketService.GetBasket(userName);
 
             basket.Items.Add(new BasketItemModel
