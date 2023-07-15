@@ -1,8 +1,5 @@
-using System;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace AspnetRunBasics
 {
@@ -10,9 +7,7 @@ namespace AspnetRunBasics
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-          
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
